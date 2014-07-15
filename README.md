@@ -1,8 +1,10 @@
 ## ElasticSearch Dockerfile
 
+Fork of official [Dockerfile](https://github.com/dockerfile/elasticsearch) with following plugins installed:
 
-This repository contains **Dockerfile** of [ElasticSearch](http://www.elasticsearch.org/) for [Docker](https://www.docker.io/)'s [trusted build](https://index.docker.io/u/dockerfile/elasticsearch/) published to the public [Docker Registry](https://index.docker.io/).
-
+  * [Morfologik Analysis](https://github.com/monterail/elasticsearch-analysis-morfologik)
+  * [MongoDB river](https://github.com/richardwilly98/elasticsearch-river-mongodb)
+  * [Marvel](http://www.elasticsearch.org/overview/marvel/)
 
 ### Dependencies
 
@@ -11,16 +13,11 @@ This repository contains **Dockerfile** of [ElasticSearch](http://www.elasticsea
 
 ### Installation
 
-1. Install [Docker](https://www.docker.io/).
-
-2. Download [trusted build](https://index.docker.io/u/dockerfile/elasticsearch/) from public [Docker Registry](https://index.docker.io/): `docker pull dockerfile/elasticsearch`
-
-   (alternatively, you can build an image from Dockerfile: `docker build -t="dockerfile/elasticsearch" github.com/dockerfile/elasticsearch`)
-
+Install [Docker](https://www.docker.io/).
 
 ### Usage
 
-    docker run -d -p 9200:9200 -p 9300:9300 dockerfile/elasticsearch
+    docker run -d -p 9200:9200 -p 9300:9300 --link mongo:mongo --name elasticsearch lzrski/elasticsearch
 
 #### Attach persistent/shared directories
 
@@ -37,7 +34,7 @@ This repository contains **Dockerfile** of [ElasticSearch](http://www.elasticsea
   3. Start a container by mounting data directory and specifying the custom configuration file:
 
     ```sh
-    docker run -d -p 9200:9200 -p 9300:9300 -v <data-dir>:/data dockerfile/elasticsearch /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
+    docker run -d -p 9200:9200 -p 9300:9300 -v <data-dir>:/data lzrski/elasticsearch /elasticsearch/bin/elasticsearch -Des.config=/data/elasticsearch.yml
     ```
 
 After few seconds, open `http://<host>:9200` to see the result.

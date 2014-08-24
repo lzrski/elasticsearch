@@ -1,15 +1,9 @@
 ## ElasticSearch Dockerfile
 
-Fork of official [Dockerfile](https://github.com/dockerfile/elasticsearch) with following plugins installed:
+With following plugins installed:
 
   * [Morfologik Analysis](https://github.com/monterail/elasticsearch-analysis-morfologik)
   * [MongoDB river](https://github.com/richardwilly98/elasticsearch-river-mongodb)
-  * [Marvel](http://www.elasticsearch.org/overview/marvel/)
-
-### Dependencies
-
-* [dockerfile/java](http://dockerfile.github.io/#/java)
-
 
 ### Installation
 

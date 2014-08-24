@@ -11,27 +11,23 @@ RUN apt-get update
 RUN apt-get install -y wget default-jre
 
 # Install ElasticSearch.
+ENV es_version 1.2.4
+
 RUN \
   cd /tmp && \
-  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.0.tar.gz && \
-  tar xvzf elasticsearch-1.1.0.tar.gz && \
-  rm -f elasticsearch-1.1.0.tar.gz && \
-  mv /tmp/elasticsearch-1.1.0 /elasticsearch
+  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$es_version.tar.gz && \
+  tar xvzf elasticsearch-$es_version.tar.gz && \
+  rm -f elasticsearch-$es_version.tar.gz && \
+  mv /tmp/elasticsearch-$es_version /elasticsearch
 
-# Define working directory.
 WORKDIR /elasticsearch
 
-ADD elasticsearch-analysis-morfologik-2.1.zip /elasticsearch/
+# Plugins
+RUN /elasticsearch/bin/plugin \
+  -i com.github.chytreg/elasticsearch-analysis-morfologik/2.3.1
 
 RUN /elasticsearch/bin/plugin \
-  -u file:///elasticsearch/elasticsearch-analysis-morfologik-2.1.zip \
-  -i analysis-morfologik
-
-RUN /elasticsearch/bin/plugin \
-    -i elasticsearch/marvel/latest
-
-RUN /elasticsearch/bin/plugin \
-    -i com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/2.0.0
+    -i com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/2.0.1
 
 # Define mountable directories.
 VOLUME ["/elasticsearch/data"]
@@ -39,8 +35,5 @@ VOLUME ["/elasticsearch/data"]
 # Define default command.
 CMD ["/elasticsearch/bin/elasticsearch"]
 
-# Expose ports.
-#   - 9200: HTTP
-#   - 9300: transport
-EXPOSE 9200
-EXPOSE 9300
+EXPOSE 9200 # HTTP API
+EXPOSE 9300 # Transport

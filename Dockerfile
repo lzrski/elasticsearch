@@ -1,9 +1,3 @@
-#
-# ElasticSearch Dockerfile
-#
-# https://github.com/dockerfile/elasticsearch
-#
-
 # Pull base image.
 FROM ubuntu:14.04
 
@@ -35,5 +29,7 @@ VOLUME ["/elasticsearch/data"]
 # Define default command.
 CMD ["/elasticsearch/bin/elasticsearch"]
 
-EXPOSE 9200 # HTTP API
-EXPOSE 9300 # Transport
+# HTTP API
+EXPOSE 9200 
+# Transport
+EXPOSE 9300

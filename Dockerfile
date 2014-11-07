@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get install -y wget default-jre
 
 # Install ElasticSearch.
-ENV es_version 1.3.1
+ENV es_version 1.3.5
 
 RUN \
   cd /tmp && \

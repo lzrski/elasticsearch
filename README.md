@@ -3,7 +3,6 @@
 With following plugins installed:
 
   * [Morfologik Analysis](https://github.com/monterail/elasticsearch-analysis-morfologik)
-  * [MongoDB river](https://github.com/richardwilly98/elasticsearch-river-mongodb)
 
 ### Installation
 

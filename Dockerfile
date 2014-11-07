@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get install -y wget default-jre
 
 # Install ElasticSearch.
-ENV es_version 1.2.4
+ENV es_version 1.3.1
 
 RUN \
   cd /tmp && \
@@ -20,9 +20,6 @@ WORKDIR /elasticsearch
 RUN /elasticsearch/bin/plugin \
   -i com.github.chytreg/elasticsearch-analysis-morfologik/2.3.1
 
-RUN /elasticsearch/bin/plugin \
-    -i com.github.richardwilly98.elasticsearch/elasticsearch-river-mongodb/2.0.1
-
 # Define mountable directories.
 VOLUME ["/elasticsearch/data"]
 
@@ -30,6 +27,6 @@ VOLUME ["/elasticsearch/data"]
 CMD ["/elasticsearch/bin/elasticsearch"]
 
 # HTTP API
-EXPOSE 9200 
+EXPOSE 9200
 # Transport
 EXPOSE 9300

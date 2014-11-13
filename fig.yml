@@ -1,0 +1,14 @@
+elasticsearch:
+  image: lzrski/elasticsearch # Automated build from this repo.
+  ports:
+    # List of hosts' addresses for my cluster.
+    # These are privete IP addresses of my hosts in DigitalOcean's AMS3 region.
+    # Change it to match your configuration.
+
+    # Localhost
+    - "127.0.0.1:9200:9200"
+    - "127.0.0.1:9300:9300"
+
+    # Elasticsearch-1
+    - "128.199.38.166:9200:9200"
+    - "128.199.38.166:9300:9300"
